@@ -28,6 +28,8 @@ class Admin extends Controller
      */
     public function action_AddNews()
     {
+        $tpl = 'post_add';
+
         if ($_POST) {
             echo 'OK';
 
@@ -40,7 +42,7 @@ class Admin extends Controller
             }
             $post->save();
         }
-        $tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'post_add.tpl';
+        $tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . $tpl . '.tpl';
 
         $this->view->display($tplfile);
     }
@@ -51,9 +53,10 @@ class Admin extends Controller
      */
     public function action_AddUser()
     {
+        $tpl = 'user_add';
+
         if ($_POST) {
             echo '<h2>Данные приняты</h2>';
-
             $user = new \App\Models\User();
             foreach ($_POST as $key => $value){
                 if ('enter' == $key){
@@ -64,7 +67,7 @@ class Admin extends Controller
             $user->save();
         }
 
-        $tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'user_add.tpl';
+        $tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . $tpl . '.tpl';
 
         $this->view->display($tplfile);
     }

@@ -1,6 +1,6 @@
 <html>
 
-<a href="../../index.php">Назад в админку</a>
+<a href="/admin/">Назад в админку</a>
 
 <div id="wrapper">
     <form method="POST" action="addnews">
