@@ -20,5 +20,4 @@ spl_autoload_register(['AutoLoad', 'loader']);
 
 //Запускаем роутер
 \App\Core\Router::Run();
-
 ?>
