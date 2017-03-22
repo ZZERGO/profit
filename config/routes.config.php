@@ -14,7 +14,6 @@ return
         '^news/([0-9]+)$'           => 'News/ViewById/$1',
         '^news/([a-z0-9-]+)$'       => 'News/ViewCategory/$1',
 
-        '^article/([0-9]+)$'        => 'News/ViewById/$1',
 
         '^$'                        => 'Index/Default',
 	];
