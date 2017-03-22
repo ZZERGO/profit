@@ -14,17 +14,11 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__));
 define('TPL_DIR', ROOT . DS .'templates');
 
-// Подключаем файл инициализации
-$init = ROOT . DS . 'app' . DS . 'init.php';
-if (file_exists($init)){
-    include_once $init;
-} else {
-    echo 'Не найден файл инициализации';
-    die();
-}
-echo 'test';
+//Подключаем автозагрузчик классов
+require_once ROOT . DS . 'app' . DS . 'core' . DS . 'autoloader.php';
+spl_autoload_register(['AutoLoad', 'loader']);
+
+//Запускаем роутер
+\App\Core\Router::Run();
 
 ?>
-
-
-
