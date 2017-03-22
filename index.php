@@ -22,6 +22,7 @@ if (file_exists($init)){
     echo 'Не найден файл инициализации';
     die();
 }
+echo 'test';
 
 ?>
 
