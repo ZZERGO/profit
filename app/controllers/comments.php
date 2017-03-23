@@ -20,6 +20,10 @@ class Comments extends Controller
 
     public function action_Show()
     {
-        echo 'Медот '. __METHOD__ . ' в классе ' . __CLASS__ . '<br>';
+        $method = __METHOD__;
+        $class = __CLASS__;
+        echo "<h1>Это медот {$method}  в классе {$class} </h1>";
+        var_dump($this);
+        var_dump($this->config->routes);
     }
 }

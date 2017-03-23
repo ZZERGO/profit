@@ -13,6 +13,7 @@ class View
     implements \Countable
 {
     public $data = [];
+    public $route = []; // текущий маршрут
 
 
     /**
