@@ -44,9 +44,6 @@ class Router
         if ($this->matchRoute()) {
             echo '<h1> СОВПАДЕНИЕ МАРШРУТА</h1>';
 
-            if (!empty($this->route)){
-                $this->params = $this->route;
-            }
         } elseif(!$this->explodeRoute()) {
             echo '<h1>Маршрут не найден</h1>';
             $this->controller = $this->path . $this->controller;
@@ -54,12 +51,10 @@ class Router
         }
 
         echo 'Текущий маршрут:';
-        var_dump($this->route);
+        var_dump($this);
 
         echo '<br><b>Контроллер:</b>' . $this->controller;
         echo '<br><b>Экшен:</b>' . $this->action;
-        echo '<br><b>Параметры:</b>';
-        var_dump($this->params);
 
         $this->exec();
 
@@ -77,8 +72,6 @@ class Router
                 $route = explode('/', preg_replace('#'.$pattern.'#i', $route, $this->uri));
                 $this->controller = $this->path . array_shift($route);
                 $this->action = 'action_' . array_shift($route);
-                $this->params = $route;
-
                 return true;
             }
         }
@@ -86,7 +79,7 @@ class Router
     }
 
 
-    // Разбиваем строку запроса по и получем из неё контроллер/метод и GET параметры
+    // Разбиваем строку запроса по слешам и получем из неё контроллер/метод и GET параметры
     private function explodeRoute()
     {
         if (!empty($this->uri)){
@@ -94,15 +87,15 @@ class Router
 
             // Получаем контроллер из первой части строки запроса (из текущего роута)
             if (class_exists($this->path . ucfirst(current($uri_parts)))){
+                $this->route['controller'] = current($uri_parts);
                 $this->controller = $this->path . ucfirst(array_shift($uri_parts));
 
                 // Получаем экшен из строки запроса
                 if (!empty(current($uri_parts))){
                     if (method_exists( new $this->controller, 'action_'.current($uri_parts))){
+                        $this->route['action'] = current($uri_parts);
                         $this->action = 'action_' . ucfirst(array_shift($uri_parts));
                         echo '<h1>Метод существует</h1>';
-                    } else {
-                        $this->params = $uri_parts;
                     }
                 }
                 return true;
@@ -115,7 +108,12 @@ class Router
     // Вызываем нужный метод в нужном классе
     private function exec()
     {
-        call_user_func_array([new $this->controller, $this->action], $this->params);
+        if (method_exists($this->controller, $this->action)){
+            call_user_func_array([new $this->controller, $this->action], $this->route);
+        } else {
+            die("Метод не существует");
+        }
+
     }
 
 

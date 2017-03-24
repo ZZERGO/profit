@@ -5,7 +5,7 @@ return
         '^about$'                   => 'Pages/About',
         '^contacts$'                => 'Pages/Contact',
         '^login$'                   => 'Users/Login',
-        '^profile$'                 => 'Users/showMyProfile',
+        '^profile$'                 => 'Users/MyProfile',
 
         '^user/([0-9]+)$'           => 'Users/ProfileById/$1',
         '^user/([a-z0-9-]+)$'       => 'Users/ProfileByLogin/$1',

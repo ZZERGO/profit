@@ -38,11 +38,12 @@ class News extends Controller
         $this->config->tpl['file'] = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'fullstory.tpl';
 
         $post = Article::findById($id);
-
-        $this->view->data = $post;
-
-        $this->view->display($this->config->tpl['file']);
-
+        if (!is_null($post)){
+            $this->view->data = $post;
+            $this->view->display($this->config->tpl['file']);
+        } else {
+            echo "Данная новость отсутствует";
+        }
     }
 
     public function action_Add()

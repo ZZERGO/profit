@@ -27,7 +27,7 @@ implements IHasEmail
     }
 
 
-    public function action_ShowMyProfile()
+    public function action_MyProfile()
     {
         echo '<h1>Здесь будет страница профиля текущего пользователя</h1>';
     }
