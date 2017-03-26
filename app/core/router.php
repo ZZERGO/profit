@@ -14,7 +14,6 @@ class Router
     private $path = 'App\Controllers\\';
     private $controller = 'Index';
     private $action = 'action_Default';
-    private $params = [];
 
     // создаём экземпляр объекта
     public static function Run(){
@@ -111,7 +110,7 @@ class Router
         if (method_exists($this->controller, $this->action)){
             call_user_func_array([new $this->controller, $this->action], $this->route);
         } else {
-            die("Метод не существует");
+            die('<h3>Метод не существует</h3>');
         }
 
     }
@@ -122,7 +121,6 @@ class Router
      */
     private function getConfig(): array
     {
-        $conf = Config::Instance('routes');
-        return $conf->routes;
+        return Config::Instance('routes')->routes;
     }
 }
