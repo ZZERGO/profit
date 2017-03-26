@@ -14,19 +14,19 @@ use App\Core\Controller;
 class Admin extends Controller
 {
 
-    public function action_Default()
+    public function action_default()
     {
         // TODO: Implement action_Default() method.
         echo '<h1>Главная страница Админ-панели </h1>';
 
-        echo '<a href="/admin/addnews">Добавить новость</a> | <a href="/admin/adduser">Добавить пользователя</a> | <a href="/">На главную</a>';
+        echo '<a href="/admin/add-news">Добавить новость</a> | <a href="/admin/add-user">Добавить пользователя</a> | <a href="/">На главную</a>';
 
     }
 
     /**
      * Добавляет новость в базу данных
      */
-    public function action_AddNews()
+    public function action_addNews()
     {
         $tpl = 'post_add';
 
@@ -51,7 +51,7 @@ class Admin extends Controller
     /**
      * Добавляет пользователя в базу данных
      */
-    public function action_AddUser()
+    public function action_addUser()
     {
         $tpl = 'user_add';
 

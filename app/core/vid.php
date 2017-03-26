@@ -30,7 +30,7 @@ class Vid
     }
 
     public function render(){
-        $file_view = ROOT . DS . 'app' . DS . 'views' . DS . $this->view . DS . $this->layout .
+        $file_view = ROOT . DS . 'app' . DS . 'views' . DS . $this->view . DS . $this->layout ;
 
     }
 

@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 
 // Задаём константы
 define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', dirname(__FILE__));
+define('ROOT', dirname(__FILE__)  . DS . '..');
 define('APP', ROOT . DS . 'App');
 define('TPL_DIR', ROOT . DS .'templates');
 
@@ -39,4 +39,7 @@ try {
 
 //Запускаем роутер
 //\App\Core\Router::Run();
+\App\Core\Router::Run();
+
+
 ?>

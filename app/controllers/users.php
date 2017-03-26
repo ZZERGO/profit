@@ -21,28 +21,28 @@ use App\Core\Interfaces\IHasEmail;
 class Users extends Controller
 implements IHasEmail
 {
-    public function action_Login()
+    public function action_login()
     {
         echo '<h1> Здесь будет форма входа на сайт</h1>';
     }
 
 
-    public function action_MyProfile()
+    public function action_myProfile()
     {
         echo '<h1>Здесь будет страница профиля текущего пользователя</h1>';
     }
 
-    public function action_ProfileByLogin(string $login)
+    public function action_profileByLogin(string $login)
     {
         echo '<h1>Здесь будет страница профиля с указанным логином: ' . $login . '</h1>';
     }
 
-    public function action_ProfileById(int $id=2)
+    public function action_profileById(int $id=2)
     {
         echo '<h1>Здесь будет страница профиля с указанным ID: ' . $id . '</h1>';
     }
 
-    public function action_Default()
+    public function action_default()
     {
         echo 'Это метод ' . __METHOD__ . ' в классе ' . __CLASS__;
     }

@@ -13,11 +13,11 @@ abstract class Controller
     public function __construct()
     {
         // $this->view = new View();
-        $this->view = new Vid();
-        $this->config = Config::Instance('tpl');
-        $this->config = Config::Instance('db');
+        //$this->view = new Vid();
+        //$this->config = Config::Instance('tpl');
+        //$this->config = Config::Instance('db');
     }
 
-    public abstract function action_Default();
+    public abstract function action_default();
 
 }

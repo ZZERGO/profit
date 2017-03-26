@@ -1,102 +1,67 @@
 <?php
 /**
- *  Формируем ссылки вида /news/sport/23
- *  news - контроллер, sport - категория новости, 23 - id новости в базе данных
- *
+ * Created by PhpStorm.
+ * User: sergey
+ * Date: 26.03.2017
+ * Time: 19:06
  */
+
 namespace App\Core;
+
 
 class Router
 {
-    private $routes = []; // Шаблоны маршрутов
-    private $route = []; // Текущий маршрут
-    private $uri = ''; // Текущий запрос
-    private $path = 'App\Controllers\\';
-    private $controller = 'Index';
-    private $action = 'action_Default';
+    private static $routes = []; // Массив маршрутов из таблицы маршрутов
+    private static $route = [];  // Текущий маршрут
 
-    // создаём экземпляр объекта
-    public static function Run(){
-        new self();
-    }
 
-    private function __construct()
+    public static function Run()
     {
-        $this->routes = $this->getConfig();
-        $this->uri =  $this->getURI();
-        $this->dispatch();
+        self::getRoutes();
+        self::dispatch(self::getURI());
     }
 
-    private function getURI()
+
+    // Получаем массив маршрутов из таблицы маршрутов (routes.config.php)
+    private static function getRoutes()
+    {
+        return self::$routes = Config::Instance('routes')->routes;
+    }
+
+
+    /**
+     * @return array
+     */
+    private static function getRoute()
+    {
+        return self::$route;
+    }
+
+
+    // Получаем строку запроса
+    private static function getURI()
     {
         return urldecode(trim($_SERVER['REQUEST_URI'], '/'));
     }
 
     /**
-     * Перенаправляет URL по корректному маршруту
-     * @param $url string Входящий URL
-     * @return void
-     */
-    private function dispatch()
-    {
-        // проверяем на совпадение запроса с маршрутами
-        if ($this->matchRoute()) {
-            echo '<h1> СОВПАДЕНИЕ МАРШРУТА</h1>';
-
-        } elseif(!$this->explodeRoute()) {
-            echo '<h1>Маршрут не найден</h1>';
-            $this->controller = $this->path . $this->controller;
-            $this->action = 'action_Error404';
-        }
-
-        echo 'Текущий маршрут:';
-        var_dump($this);
-
-        echo '<br><b>Контроллер:</b>' . $this->controller;
-        echo '<br><b>Экшен:</b>' . $this->action;
-
-        $this->exec();
-
-    }
-
-
-    /** проверяем строку запроса на совпадение с существующими маршрутами
+     * проверяем строку запроса на совпадение с существующими маршрутами
+     * @param string $uri Строка запроса
      * @return bool
      */
-    private function matchRoute()
+    private static function matchRoute($uri)
     {
-        foreach ($this->routes as $pattern => $route) {
-            if (preg_match("#$pattern#i", $this->uri, $match)) {
-                var_dump($pattern);
-                $route = explode('/', preg_replace('#'.$pattern.'#i', $route, $this->uri));
-                $this->controller = $this->path . array_shift($route);
-                $this->action = 'action_' . array_shift($route);
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    // Разбиваем строку запроса по слешам и получем из неё контроллер/метод и GET параметры
-    private function explodeRoute()
-    {
-        if (!empty($this->uri)){
-            $uri_parts = explode('/', $this->uri);
-
-            // Получаем контроллер из первой части строки запроса (из текущего роута)
-            if (class_exists($this->path . ucfirst(current($uri_parts)))){
-                $this->route['controller'] = current($uri_parts);
-                $this->controller = $this->path . ucfirst(array_shift($uri_parts));
-
-                // Получаем экшен из строки запроса
-                if (!empty(current($uri_parts))){
-                    if (method_exists( new $this->controller, 'action_'.current($uri_parts))){
-                        $this->route['action'] = current($uri_parts);
-                        $this->action = 'action_' . ucfirst(array_shift($uri_parts));
-                        echo '<h1>Метод существует</h1>';
+        foreach (self::$routes as $pattern => $route) {
+            if ( preg_match("#$pattern#i", $uri, $matches) ) {
+                foreach ($matches as $key => $value){
+                    if (is_string($key)){
+                        $route[$key] = $value;
                     }
                 }
+                if (!isset($route['action'])){
+                    $route['action'] = 'default';
+                }
+                self::$route = $route;
                 return true;
             }
         }
@@ -104,23 +69,54 @@ class Router
     }
 
 
-    // Вызываем нужный метод в нужном классе
-    private function exec()
+    /**
+     * Перенаправляет URL по корректному маршруту
+     * @param $uri string Входящий URL
+     * @return void
+     */
+    private static function dispatch($uri)
     {
-        if (method_exists($this->controller, $this->action)){
-            call_user_func_array([new $this->controller, $this->action], $this->route);
+        if (self::matchRoute($uri)){
+            echo '<h3>Совпадение найдено</h3>';
+            var_dump(self::$route);
+            $controller = self::upperCamelCase('App\Controllers\\' . ucfirst(self::$route['controller']));
+            echo '<h3>Контроллер: ' . $controller . '</h3>';
+            if (class_exists($controller)){
+                $cObj = new $controller;
+                $action = 'action_' . self::lowerCamelCase(ucfirst(self::$route['action']));
+                echo '<h3>Метод: ' . $action . '</h3>';
+                if (method_exists($cObj, $action)){
+                    $cObj->$action();
+                } else {
+                    echo '<h3>Метод не найден</h3>';
+                }
+            } else {
+                echo "<h3>Контроллер $controller не найден</h3>";
+            }
         } else {
-            die('<h3>Метод не существует</h3>');
+            http_response_code(404);
+            include ROOT . DS . '404.html';
         }
-
     }
 
 
-    /**Получаем маршруты из файла конфигурации
-     * @return array
+    /**
+     * Переводим строку вида word-word виду WordWord
+     * @param $name
+     * @return mixed
      */
-    private function getConfig(): array
+    private static function upperCamelCase($name)
     {
-        return Config::Instance('routes')->routes;
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
+    }
+
+    /**
+     * Переводим строку вида word-word к виду wordWord
+     * @param $name
+     * @return string
+     */
+    private static function lowerCamelCase($name)
+    {
+        return lcfirst(self::upperCamelCase($name));
     }
 }

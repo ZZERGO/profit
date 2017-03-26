@@ -16,7 +16,7 @@ class News extends Controller
 {
 
 
-    public function action_Default()
+    public function action_default()
     {
 
         echo '<h1>Просмотр всех новостей</h1>';
@@ -31,7 +31,7 @@ class News extends Controller
 
     }
 
-    public function action_ViewById($id)
+    public function action_viewById($id)
     {
         echo '<h1>Просмотр новости c ID = ' . $id . '</h1>';
 
@@ -46,13 +46,13 @@ class News extends Controller
         }
     }
 
-    public function action_Add()
+    public function action_addNews()
     {
         echo '<h1>добавление новости</h1>';
     }
 
 
-    public function action_ViewCategory(string $CategoryName)
+    public function action_viewCategory(string $CategoryName)
     {
         echo '<h1>Просмотр новостей в категории: ' . $CategoryName . '</h1>';
     }

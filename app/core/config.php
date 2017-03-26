@@ -14,8 +14,8 @@ namespace App\Core;
  */
 class Config {
 
-    protected static $instance = null;
-    protected static $data = [];
+    private static $instance = null;
+    private static $data = [];
 
 
     /**
@@ -25,14 +25,11 @@ class Config {
      */
     public static function Instance($name=null)
     {
-        if (null == self::$instance){
+        if (is_null(self::$instance)){
             self::$instance = new self($name);
-        } else {
-            if (!empty($name)){
-                self::$data[$name] = self::$instance->loadConfig($name);
-
-                self::$instance->set($name, self::$data[$name]);
-            }
+        } elseif (!empty($name)){
+            self::$data[$name] = self::$instance->loadConfig($name);
+            self::$instance->set($name, self::$data[$name]);
         }
         return self::$instance;
     }
@@ -61,8 +58,8 @@ class Config {
         if (is_readable($file)) {
             $config = include $file;
         } else {
-            echo 'Не найден файл с настройками ' . $file;
-            die();
+            die('<h3>Не найден файл с настройками</h3>' . $file);
+
         }
         return $config;
     }
@@ -73,7 +70,7 @@ class Config {
      * @param $config array Массив параметров
      * @param $name string Имя ключа в массиве параметров $data
      */
-    protected function set(string $name, array $config)
+    private function set(string $name, array $config)
     {
         foreach ($config as $key => $value){
             $this->$name[$key] = $value;

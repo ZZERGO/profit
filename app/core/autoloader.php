@@ -1,21 +1,22 @@
 <?php
 
-class AutoLoad
+namespace App\Core;
+
+abstract class AutoLoad
 {
     public static function loader($className){
         $toLower = strtolower($className);
         $array =  explode('\\', $toLower);
-        $file =  dirname(__FILE__) . DS . '..' . DS . '..' . DS . implode(DS, $array) . '.php';
+        $file =  ROOT . DS . implode(DS, $array) . '.php';
 
 
         try{
-            if(file_exists($file)){
+            if(file_exists($file) & is_readable($file)){
                 require_once $file;
-                //echo '<h4>Подключен файл - ' . $file . '</h4>';
             }else{
-                throw new Exception ('Отсутствует файл ' . strtolower($file) . ' класса ' . $className . '.php');
+                throw new \Exception ("<h3>Отсутствует файл $file");
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo '<h2>ОШИБКА:</h2> ' . $e->getMessage();
         }
     }
