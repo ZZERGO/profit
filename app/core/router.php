@@ -76,9 +76,9 @@ class Router
      */
     private static function dispatch($uri)
     {
+        $uri = self::removeQueryString($uri);
         if (self::matchRoute($uri)){
             echo '<h3>Совпадение найдено</h3>';
-            var_dump(self::$route);
             $controller = self::upperCamelCase('App\Controllers\\' . ucfirst(self::$route['controller']));
             echo '<h3>Контроллер: ' . $controller . '</h3>';
             if (class_exists($controller)){
@@ -118,5 +118,21 @@ class Router
     private static function lowerCamelCase($name)
     {
         return lcfirst(self::upperCamelCase($name));
+    }
+
+    private static function removeQueryString($uri)
+    {
+        if ($uri){
+            $explUri = explode('?', $uri);
+            var_dump($explUri);
+            foreach ($explUri as $key => $value){
+                if (strpos($value, '=')){
+                    $uri = $value;
+                }
+            }
+            $params = explode('&', $uri);
+            var_dump($params);
+        }
+        return $uri;
     }
 }

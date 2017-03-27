@@ -18,32 +18,14 @@ class News extends Controller
 
     public function action_default()
     {
-
-        echo '<h1>Просмотр всех новостей</h1>';
-
-        $this->config->tpl['file'] = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'main.tpl';
-
-        $news = Article::findLast(5);
-
-        $this->view->data = $news;
-
-        $this->view->display($this->config->tpl['file']);
-
+        var_dump($_GET);
+        var_dump($this->route);
     }
 
-    public function action_viewById($id)
+    public function action_fullstory($id)
     {
         echo '<h1>Просмотр новости c ID = ' . $id . '</h1>';
 
-        $this->config->tpl['file'] = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'fullstory.tpl';
-
-        $post = Article::findById($id);
-        if (!is_null($post)){
-            $this->view->data = $post;
-            $this->view->display($this->config->tpl['file']);
-        } else {
-            echo "Данная новость отсутствует";
-        }
     }
 
     public function action_addNews()
@@ -52,7 +34,7 @@ class News extends Controller
     }
 
 
-    public function action_viewCategory(string $CategoryName)
+    public function action_viewCategoryNews(string $CategoryName)
     {
         echo '<h1>Просмотр новостей в категории: ' . $CategoryName . '</h1>';
     }

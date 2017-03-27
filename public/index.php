@@ -12,9 +12,10 @@ ini_set('display_errors', 1);
 // Задаём константы
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__)  . DS . '..');
-define('APP', ROOT . DS . 'App');
+define('APP', ROOT . DS . 'app');
 define('TPL_DIR', ROOT . DS .'templates');
 
+var_dump($_GET);
 
 // Подключаем автозагрузку и регистрируем в стеке
 try {

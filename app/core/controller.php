@@ -13,12 +13,13 @@ abstract class Controller
     public function __construct($route)
     {
         $this->route = $route;
-        $this->view = $this->view['action'];
-        include APP . DS . 'views' . DS . $this->route['controller'] . DS . $this->view . '.php';
-        // $this->view = new View();
-        //$this->view = new Vid();
-        //$this->config = Config::Instance('tpl');
-        //$this->config = Config::Instance('db');
+        $this->view = $this->route['action'];
+        $view_file =  APP . DS . 'views' . DS . lcfirst($this->route['controller']) . DS . $this->view . '.php';
+        if (isset($view_file)){
+            include $view_file;
+        } else {
+            echo 'Не найден вид';
+        }
     }
 
     public abstract function action_default();

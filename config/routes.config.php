@@ -1,19 +1,22 @@
 <?php
 
 return [
-
-    '^about$' => ['controller' => 'Pages', 'action' => 'about'],
     '^login$' => ['controller' => 'Users', 'action' => 'login'],
     '^profile$' => ['controller' => 'Users', 'action' => 'userProfile'],
 
     '^user/([0-9]+)$' => ['controller' => 'Users', 'action' => 'profileById'],
     '^user/([a-z0-9-]+)$' => ['controller' => 'Users', 'action' => 'profileByLogin'],
+    '^page/(?<action>[a-z-]+)/(?<alias>[a-z-]+)$' => ['controller' => 'Page'],
+    '^page/(?<alias>[a-z-]+)$' => ['controller' => 'Page', 'action' => 'view'],
+
 
     '^news/add$' => ['controller' => 'News', 'action' => 'addNews'],
-    '^news/([0-9]+)$' => ['controller' => 'News', 'action' => 'viewById'],
+    '^news/([0-9]+)$' => ['controller' => 'News', 'action' => 'fullstory'],
+    '^news/([a-z0-9-]+)$' => ['controller' => 'News', 'action' => 'viewCategoryNews'],
 
+//    '^(?<alias>[a-z-]+)$' => ['controller' => 'Page', 'action' => 'view'],
     '(^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?)$' => [],
-    '^$' => ['controller' => 'Index', 'action' => 'default'],
+//    '^$' => ['controller' => 'Index', 'action' => 'default'],
 ];
 
 
