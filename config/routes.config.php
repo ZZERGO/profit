@@ -10,9 +10,9 @@ return [
     '^page/(?<alias>[a-z0-9-]+)$' => ['controller' => 'Page', 'action' => 'view'],
 
 
-    '^news/add$' => ['controller' => 'News', 'action' => 'addNews'],
+    '^news/add$' => ['controller' => 'News', 'action' => 'add'],
     '^news/([0-9]+)$' => ['controller' => 'News', 'action' => 'fullstory'],
-    '^news/([a-z0-9-]+)$' => ['controller' => 'News', 'action' => 'viewCategoryNews'],
+//    '^news/([a-z0-9-]+)$' => ['controller' => 'News', 'action' => 'viewCategoryNews'],
 
 //    '^(?<alias>[a-z-]+)$' => ['controller' => 'Page', 'action' => 'view'],
     '(^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?)$' => [],

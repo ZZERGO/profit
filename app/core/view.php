@@ -10,66 +10,54 @@ namespace App\Core;
  * @property $news
  */
 class View
-    implements \Countable
 {
-    public $data = [];
-    public $route = []; // текущий маршрут
-
+    /**
+     * текущий маршрут
+     * @var array
+     */
+    public $route = [];
 
     /**
-     * @param $key
-     * @param $value
+     * текущий вид
+     * @var string
      */
-    public function __set($key, $value){
-        $this->data[$key] = $value;
-    }
-
-    public function __get($key){
-        return $this->data[$key];
-    }
-
-    public function __isset($key)
-    {
-        return isset($this->data[$key]);
-    }
-
-    public function display($tpl)
-    {
-        echo $this->render($tpl);
-    }
+    public $view = '';
 
     /**
-     * @param $tpl string Путь к шаблону
-     * @return string Возвращает HTML код для отображения
+     * текущий шаблон
+     * @var string
      */
-    public function render($tpl){
+    public $layout = 'default';
+
+    public function __construct($route, $layout ='default', $view = '')
+    {
+        $this->route = $route;
+
+        if ($layout){
+            $this->layout = $layout;
+        }
+
+        $this->view = str_replace('-', '', $view);
+    }
+
+    public function render()
+    {
+        $file_view =  APP . DS . 'views' . DS . str_replace('-', '', lcfirst($this->route['controller'])) . DS . $this->view . '.php';
+
         ob_start();
-
-        foreach ($this->data as $key => $value){
-            $$key = $value;
-        }
-        if (file_exists($tpl)){
-            include $tpl;
+        if (is_file($file_view)){
+            require $file_view;
         } else {
-            echo 'Не найден файл шаблона' . $tpl . '<br>';
+            echo '<h2>Не найден файл вида: ' . $file_view . '</h2>';
         }
-        $html = ob_get_contents();
+        $content = ob_get_clean();
 
-        ob_end_clean();
-        return $html;
+        $file_layout = APP . DS . 'views' .  DS . '_layouts' . DS . $this->layout . '.php';
+
+        if (is_file($file_layout)){
+            require $file_layout;
+        } else {
+            echo '<h2>Не найден файл шаблона: </h2>' . $this->layout;
+        }
     }
-
-
-
-    public function count()
-    {
-        return count($this->data);
-    }
-
-
-    public function getContent(){
-
-        return $html;
-    }
-
 }

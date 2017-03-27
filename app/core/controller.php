@@ -6,20 +6,29 @@ namespace App\Core;
 abstract class Controller
 {
 
-    protected $route = []; // Текущий маршрут
-    protected $view; // Подключаемый вид
-    protected $tpl_file = '';
+    /**
+     * // Текущий маршрут (controller, action, params)
+     * @var array
+     */
+    protected $route = [];
+
+    /**
+     * Подключаемый вид
+     * @var
+     */
+    protected $view = '';
+    protected $layout = '';
 
     public function __construct($route)
     {
         $this->route = $route;
-        $this->view = $this->route['action'];
-        $view_file =  APP . DS . 'views' . DS . str_replace('-', '', lcfirst($this->route['controller'])) . DS . $this->view . '.php';
-        if (isset($view_file)){
-            include $view_file;
-        } else {
-            echo 'Не найден вид';
-        }
+        $this->view = $route['action'];
+    }
+
+    public function getView()
+    {
+        $vObj = new View($this->route, $this->layout, $this->view);
+        $vObj->render();
     }
 
     public abstract function action_default();

@@ -18,8 +18,7 @@ class News extends Controller
 
     public function action_default()
     {
-        var_dump($_GET);
-        var_dump($this->route);
+        echo __METHOD__;
     }
 
     public function action_fullstory($id)

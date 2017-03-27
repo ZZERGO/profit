@@ -16,13 +16,11 @@ class Page extends Controller
 
     public function action_view()
     {
-        var_dump($this->route);
         echo __CLASS__ . ' - ' . __METHOD__;
     }
 
     public function action_default()
     {
         echo __METHOD__;
-        var_dump($_GET);
     }
 }

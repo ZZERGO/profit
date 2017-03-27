@@ -28,23 +28,7 @@ class Admin extends Controller
      */
     public function action_addNews()
     {
-        $tpl = 'post_add';
 
-        if ($_POST) {
-            echo 'OK';
-
-            $post = new \App\Models\Article();
-            foreach ($_POST as $key => $value){
-                if ('enter' == $key){
-                    continue;
-                }
-                $post->$key = $value;
-            }
-            $post->save();
-        }
-        $tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . $tpl . '.tpl';
-
-        $this->view->display($tplfile);
     }
 
 

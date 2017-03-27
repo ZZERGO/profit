@@ -82,14 +82,15 @@ class Router
         if (self::matchRoute($uri)){
             //echo '<h3>Совпадение найдено</h3>';
             $controller = 'App\Controllers\\' . self::upperCamelCase(self::$route['controller']);
-            echo '<h3>Контроллер: ' . $controller . '</h3>';
+            //echo '<h3>Контроллер: ' . $controller . '</h3>';
             if (class_exists($controller)){
                 $cObj = new $controller(self::$route);
                 //var_dump(self::$route);
                 $action = 'action_' . self::lowerCamelCase(ucfirst(self::$route['action']));
-                echo '<h3>Метод: ' . $action . '</h3>';
+                //echo '<h3>Метод: ' . $action . '</h3>';
                 if (method_exists($cObj, $action)){
                     $cObj->$action();
+                    $cObj->getView();
                 } else {
                     echo '<h3>Метод не найден</h3>';
                 }
