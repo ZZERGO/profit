@@ -82,7 +82,7 @@ class Router
             $controller = self::upperCamelCase('App\Controllers\\' . ucfirst(self::$route['controller']));
             echo '<h3>Контроллер: ' . $controller . '</h3>';
             if (class_exists($controller)){
-                $cObj = new $controller;
+                $cObj = new $controller(self::$route);
                 $action = 'action_' . self::lowerCamelCase(ucfirst(self::$route['action']));
                 echo '<h3>Метод: ' . $action . '</h3>';
                 if (method_exists($cObj, $action)){
@@ -95,7 +95,7 @@ class Router
             }
         } else {
             http_response_code(404);
-            include ROOT . DS . '404.html';
+            include '404.html';
         }
     }
 

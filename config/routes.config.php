@@ -4,7 +4,7 @@ return [
 
     '^about$' => ['controller' => 'Pages', 'action' => 'about'],
     '^login$' => ['controller' => 'Users', 'action' => 'login'],
-    '^profile$' => ['controller' => 'Users', 'action' => 'myProfile'],
+    '^profile$' => ['controller' => 'Users', 'action' => 'userProfile'],
 
     '^user/([0-9]+)$' => ['controller' => 'Users', 'action' => 'profileById'],
     '^user/([a-z0-9-]+)$' => ['controller' => 'Users', 'action' => 'profileByLogin'],

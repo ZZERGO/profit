@@ -27,7 +27,7 @@ implements IHasEmail
     }
 
 
-    public function action_myProfile()
+    public function action_userProfile()
     {
         echo '<h1>Здесь будет страница профиля текущего пользователя</h1>';
     }
@@ -45,6 +45,7 @@ implements IHasEmail
     public function action_default()
     {
         echo 'Это метод ' . __METHOD__ . ' в классе ' . __CLASS__;
+        var_dump($this);
     }
 
 
