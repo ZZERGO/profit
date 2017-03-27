@@ -14,7 +14,7 @@ abstract class Controller
     {
         $this->route = $route;
         $this->view = $this->route['action'];
-        $view_file =  APP . DS . 'views' . DS . lcfirst($this->route['controller']) . DS . $this->view . '.php';
+        $view_file =  APP . DS . 'views' . DS . str_replace('-', '', lcfirst($this->route['controller'])) . DS . $this->view . '.php';
         if (isset($view_file)){
             include $view_file;
         } else {

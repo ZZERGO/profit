@@ -20,14 +20,14 @@ class Index extends Controller
         echo '<h2>Ошибка 404<br>Страница не найдена</h2>';
     }
 
-    public function action_Default()
+    public function action_default()
     {
         //echo '<h1>Это главная страница сайта</h1>';
-        $this->config->tpl['file'] = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'main.tpl';
-        echo $this->config->tpl['file'];
-        $news = Article::findAll();
-        $this->view->data = $news;
-        $this->view->display($this->config->tpl['file']);
+        //$this->config->tpl['file'] = TPL_DIR . DS . $this->config->tpl['name'] . DS . 'main.tpl';
+        //echo $this->config->tpl['file'];
+        //$news = Article::findAll();
+        //$this->view->data = $news;
+        //$this->view->display($this->config->tpl['file']);
     }
 
 

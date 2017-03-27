@@ -77,12 +77,15 @@ class Router
     private static function dispatch($uri)
     {
         $uri = self::removeQueryString($uri);
+        //echo '<h3>Строка URI: </h3>' . $uri;
+
         if (self::matchRoute($uri)){
-            echo '<h3>Совпадение найдено</h3>';
-            $controller = self::upperCamelCase('App\Controllers\\' . ucfirst(self::$route['controller']));
+            //echo '<h3>Совпадение найдено</h3>';
+            $controller = 'App\Controllers\\' . self::upperCamelCase(self::$route['controller']);
             echo '<h3>Контроллер: ' . $controller . '</h3>';
             if (class_exists($controller)){
                 $cObj = new $controller(self::$route);
+                //var_dump(self::$route);
                 $action = 'action_' . self::lowerCamelCase(ucfirst(self::$route['action']));
                 echo '<h3>Метод: ' . $action . '</h3>';
                 if (method_exists($cObj, $action)){
@@ -124,14 +127,14 @@ class Router
     {
         if ($uri){
             $explUri = explode('?', $uri);
-            var_dump($explUri);
             foreach ($explUri as $key => $value){
-                if (strpos($value, '=')){
+                if (false === strpos($value, '=')){
                     $uri = $value;
                 }
             }
             $params = explode('&', $uri);
-            var_dump($params);
+            //echo '<h3>Параметры строки запроса:</h3>';
+            //var_dump($explUri);
         }
         return $uri;
     }

@@ -15,7 +15,8 @@ define('ROOT', dirname(__FILE__)  . DS . '..');
 define('APP', ROOT . DS . 'app');
 define('TPL_DIR', ROOT . DS .'templates');
 
-var_dump($_GET);
+//echo '<h3>GET-параметры:</h3>';
+//var_dump($_GET);
 
 // Подключаем автозагрузку и регистрируем в стеке
 try {

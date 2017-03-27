@@ -19,5 +19,10 @@ class PageNew extends Controller
         // TODO: Implement action_default() method.
     }
 
+    public function action_test()
+    {
+        echo __METHOD__;
+    }
+
 
 }
