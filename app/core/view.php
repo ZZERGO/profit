@@ -29,11 +29,13 @@ class View
      */
     public $layout = 'default';
 
-    public function __construct($route, $layout ='default', $view = '')
+    public function __construct($route, $layout = '', $view = '')
     {
         $this->route = $route;
 
-        if ($layout){
+        if (false === $layout){
+            $this->layout = false;
+        } elseif ($layout){
             $this->layout = $layout;
         }
 
@@ -42,7 +44,7 @@ class View
 
     public function render()
     {
-        $file_view =  APP . DS . 'views' . DS . str_replace('-', '', lcfirst($this->route['controller'])) . DS . $this->view . '.php';
+        $file_view =  APP . DS . 'views' . DS . str_replace('-', '', lcfirst($this->route['controller'])) . DS . strtolower($this->view) . '.php';
 
         ob_start();
         if (is_file($file_view)){
@@ -54,10 +56,13 @@ class View
 
         $file_layout = APP . DS . 'views' .  DS . '_layouts' . DS . $this->layout . '.php';
 
-        if (is_file($file_layout)){
-            require $file_layout;
-        } else {
-            echo '<h2>Не найден файл шаблона: </h2>' . $this->layout;
+        if (false !== $this->layout){
+            if (is_file($file_layout)){
+                require $file_layout;
+            } else {
+                echo '<h2>Не найден файл шаблона: </h2>' . $this->layout;
+            }
         }
+
     }
 }

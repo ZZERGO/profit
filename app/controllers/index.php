@@ -9,10 +9,8 @@
 namespace App\Controllers;
 
 
-use App\Core\Controller;
-use App\Models\Article;
 
-class Index extends Controller
+class Index extends App
 {
 
     public function action_Error404()

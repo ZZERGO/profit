@@ -16,8 +16,8 @@ abstract class Controller
      * Подключаемый вид
      * @var
      */
-    protected $view = '';
-    protected $layout = '';
+    protected $view = 'default';
+    protected $layout = 'default';
 
     public function __construct($route)
     {

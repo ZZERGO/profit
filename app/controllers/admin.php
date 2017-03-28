@@ -9,17 +9,12 @@
 namespace app\controllers;
 
 
-use App\Core\Controller;
-
-class Admin extends Controller
+class Admin extends App
 {
 
     public function action_default()
     {
         // TODO: Implement action_Default() method.
-        echo '<h1>Главная страница Админ-панели </h1>';
-
-        echo '<a href="/admin/add-news">Добавить новость</a> | <a href="/admin/add-user">Добавить пользователя</a> | <a href="/">На главную</a>';
 
     }
 
@@ -37,23 +32,23 @@ class Admin extends Controller
      */
     public function action_addUser()
     {
-        $tpl = 'user_add';
+       ////$tpl = 'user_add';
 
-        if ($_POST) {
-            echo '<h2>Данные приняты</h2>';
-            $user = new \App\Models\User();
-            foreach ($_POST as $key => $value){
-                if ('enter' == $key){
-                    continue;
-                }
-                $user->$key = $value;
-            }
-            $user->save();
-        }
+       //if ($_POST) {
+       //    echo '<h2>Данные приняты</h2>';
+       //    $user = new \App\Models\User();
+       //    foreach ($_POST as $key => $value){
+       //        if ('enter' == $key){
+       //            continue;
+       //        }
+       //        $user->$key = $value;
+       //    }
+       //    $user->save();
+       //}
 
-        $tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . $tpl . '.tpl';
+       //$tplfile = TPL_DIR . DS . $this->config->tpl['name'] . DS . $tpl . '.tpl';
 
-        $this->view->display($tplfile);
+       //$this->view->display($tplfile);
     }
 
 }

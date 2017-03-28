@@ -1,17 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: trushkov
- * Date: 03.11.2016
- * Time: 16:09
- */
+
 
 namespace App\Controllers;
 
 
-use App\Core\Controller;
-
-class Comments extends Controller
+class Comments extends App
 {
     public function action_Default()
     {

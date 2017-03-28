@@ -8,11 +8,8 @@
 
 namespace App\Controllers;
 
-use App\Core\Controller;
-use App\Core\View;
-use App\Models\Article;
 
-class News extends Controller
+class News extends App
 {
 
 

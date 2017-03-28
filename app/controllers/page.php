@@ -9,9 +9,7 @@
 namespace App\Controllers;
 
 
-use App\Core\Controller;
-
-class Page extends Controller
+class Page extends App
 {
 
     public function action_view()

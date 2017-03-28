@@ -8,8 +8,6 @@
 
 namespace App\Controllers;
 
-
-use App\Core\Controller;
 use App\Core\Interfaces\IHasEmail;
 
 /**
@@ -18,28 +16,31 @@ use App\Core\Interfaces\IHasEmail;
  * $property
  */
 
-class Users extends Controller
+class Users extends App
 implements IHasEmail
 {
     public function action_login()
     {
-        echo '<h1> Здесь будет форма входа на сайт</h1>';
+
     }
 
 
     public function action_userProfile()
     {
-        echo '<h1>Здесь будет страница профиля текущего пользователя</h1>';
+        $this->view = 'profile';
     }
 
-    public function action_profileByLogin(string $login)
+    public function action_profileByLogin()
     {
-        echo '<h1>Здесь будет страница профиля с указанным логином: ' . $login . '</h1>';
+        $this->view = 'profile';
     }
 
-    public function action_profileById(int $id=2)
+    public function action_profileById()
     {
-        echo '<h1>Здесь будет страница профиля с указанным ID: ' . $id . '</h1>';
+        var_dump($this->route);
+        //$this->layout = false;
+        $this->view = 'profile';
+        //echo 111;
     }
 
     public function action_default()
