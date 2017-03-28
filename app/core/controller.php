@@ -17,7 +17,17 @@ abstract class Controller
      * @var
      */
     protected $view = 'default';
+
+    /** подклчаемый шаблон
+     * @var string
+     */
     protected $layout = 'default';
+
+    /**
+     * Пользовательские данные
+     * @var array
+     */
+    public $data = [];
 
     public function __construct($route)
     {
@@ -28,7 +38,13 @@ abstract class Controller
     public function getView()
     {
         $vObj = new View($this->route, $this->layout, $this->view);
-        $vObj->render();
+        $vObj->render($this->data);
+    }
+
+
+    public function set($vars)
+    {
+        $this->data = $vars;
     }
 
     public abstract function action_default();

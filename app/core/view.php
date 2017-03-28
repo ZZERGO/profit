@@ -42,8 +42,10 @@ class View
         $this->view = str_replace('-', '', $view);
     }
 
-    public function render()
+    public function render(array $data)
     {
+        extract($data);
+
         $file_view =  APP . DS . 'views' . DS . str_replace('-', '', lcfirst($this->route['controller'])) . DS . strtolower($this->view) . '.php';
 
         ob_start();

@@ -20,5 +20,12 @@ class Page extends App
     public function action_default()
     {
         echo __METHOD__;
+        var_dump($this->route);
+
+    }
+
+    public function action_static()
+    {
+        $this->set($this->route);
     }
 }
