@@ -3,7 +3,7 @@
 return [
     '^login$' => ['controller' => 'Users', 'action' => 'login'],
     '^profile$' => ['controller' => 'Users', 'action' => 'userProfile'],
-  //  '^about$' => ['controller' => 'Page', ],
+
     '^(?P<alias>[a-z-]+)$' => ['controller' => 'Page', 'action' => 'static'],
 
     '^user/([0-9]+)$' => ['controller' => 'Users', 'action' => 'profileById'],
