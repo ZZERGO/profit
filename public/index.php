@@ -40,13 +40,7 @@ try {
 }
 
 //Запускаем роутер
-//\App\Core\Router::Run();
-//\App\Core\Router::Run();
+\App\Core\Router::Run();
 
-$reg = \App\Core\Registry::getInstance();
-$reg->test->go();
-$reg->test2->hello();
-$reg->start = '\libs\components\test3';
-var_dump($reg->start);
 
 ?>
