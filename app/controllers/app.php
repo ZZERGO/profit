@@ -17,6 +17,8 @@ class App extends Controller
 {
 
 
+    protected $layout = 'bootstrap_one';
+
     public function action_default()
     {
         // TODO: Implement action_default() method.

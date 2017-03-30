@@ -22,7 +22,7 @@ class Index extends App
 
     public function action_default()
     {
-        $this->layout = 'bootstrap_one';
+
         $title = 'Самый лучший сайт';
         $name = 'Сергей';
         $this->set(compact('name', 'city', 'color', 'title'));

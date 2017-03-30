@@ -24,6 +24,11 @@ implements IHasEmail
 
     }
 
+    public function action_register()
+    {
+
+    }
+
 
     public function action_userProfile()
     {
@@ -39,7 +44,7 @@ implements IHasEmail
     {
         var_dump($this->route);
         //$this->layout = false;
-        $this->view = 'profile';
+        //$this->view = 'profile';
         //echo 111;
     }
 

@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Ошибка 404</title>
+    <title>404 error page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link href="css/error404/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-    <h1>Страница не найдена</h1>
+<!-----start-wrap--------->
+<div class="wrap">
+    <!-----start-content--------->
+    <div class="content">
+        <!-----start-logo--------->
+        <div class="logo">
+            <h1><a href="/"><img src="images/error404/logo.png"/></a></h1>
+            <span><img src="images/error404/signal.png"/>Ошибка! Запрошенная страница не найдена!</span>
+        </div>
+        <!-----end-logo--------->
+        <!-----start-search-bar-section--------->
+        <div class="buttom">
+            <div class="seach_bar">
+                <p>Вы можете вернуться на <span><a href="/">главную</a></span> страницу или воспользоваться формой поиска ниже</p>
+                <!-----start-sear-box--------->
+                <div class="search_box">
+                    <form>
+                        <input type="text" value="Найти" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Введите тескт для поиска';}"><input type="submit" value="">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-----end-sear-bar--------->
+    </div>
+</div>
+
+<!---------end-wrap---------->
 </body>
 </html>

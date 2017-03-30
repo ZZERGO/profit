@@ -2,6 +2,7 @@
 
 return [
     '^login$' => ['controller' => 'Users', 'action' => 'login'],
+    '^register$' => ['controller' => 'Users', 'action' => 'register'],
     '^profile$' => ['controller' => 'Users', 'action' => 'userProfile'],
     '^about$' => ['controller' => 'Page', 'action' => 'view'],
 
