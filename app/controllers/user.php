@@ -33,12 +33,6 @@ implements IHasEmail
 
     }
 
-    public function action_register()
-    {
-
-    }
-
-
     public function action_userProfile()
     {
         $this->view = 'profile';
