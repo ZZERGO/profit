@@ -23,6 +23,7 @@ implements IHasEmail
     {
         if ($_POST){
             //header(" Location: http://profit ");
+
             echo '<meta refresh="0;https://merchant.webmoney.ru/">';
             exit();
         }
