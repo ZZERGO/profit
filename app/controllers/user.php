@@ -26,6 +26,7 @@ implements IHasEmail
         }
     }
 
+
     public function action_register()
     {
 
