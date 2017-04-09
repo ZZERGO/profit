@@ -21,6 +21,7 @@ class News extends App
     public function action_fullstory($id)
     {
         echo '<h1>Просмотр новости c ID = ' . $id . '</h1>';
+
     }
 
     public function action_add()
