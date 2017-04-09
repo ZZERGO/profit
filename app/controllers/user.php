@@ -16,10 +16,19 @@ use App\Core\Interfaces\IHasEmail;
  * $property
  */
 
-class Users extends App
+class User extends App
 implements IHasEmail
 {
     public function action_login()
+    {
+        if ($_POST){
+            //header(" Location: http://profit ");
+            echo '<meta refresh="0;https://merchant.webmoney.ru/">';
+            exit();
+        }
+    }
+
+    public function action_register()
     {
 
     }

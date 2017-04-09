@@ -39,8 +39,10 @@ try {
     die($e->getMessage());
 }
 
+
 //Запускаем роутер
 \App\Core\Router::Run();
+
 
 
 ?>

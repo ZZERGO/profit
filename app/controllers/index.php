@@ -22,7 +22,6 @@ class Index extends App
 
     public function action_default()
     {
-
         $title = 'Самый лучший сайт';
         $name = 'Сергей';
         $this->set(compact('name', 'city', 'color', 'title'));

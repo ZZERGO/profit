@@ -16,6 +16,8 @@ use App\Core\Controller;
 class App extends Controller
 {
 
+    protected $layout = 'bootstrap_one';
+
 
     protected $layout = 'bootstrap_one';
 

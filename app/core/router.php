@@ -19,7 +19,9 @@ class Router
     {
         self::getRoutes();
         self::dispatch(self::getURI());
+        //echo self::testRegexp(self::getURI());
     }
+
 
 
     // Получаем массив маршрутов из таблицы маршрутов (routes.config.php)
@@ -41,6 +43,7 @@ class Router
     // Получаем строку запроса
     private static function getURI()
     {
+        //echo urldecode(trim($_SERVER['REQUEST_URI'], '/'));
         return urldecode(trim($_SERVER['REQUEST_URI'], '/'));
     }
 
@@ -49,24 +52,40 @@ class Router
      * @param string $uri Строка запроса
      * @return bool
      */
-    private static function matchRoute($uri)
+    public static function matchRoute($uri)
     {
-        foreach (self::$routes as $pattern => $route) {
-            if ( preg_match("#$pattern#i", $uri, $matches) ) {
+        //echo '<h2>Текущий URI: ' . self::getURI() . '</h2>';
+        foreach (self::$routes as $pattern => $route){
+
+            if ( preg_match("#$pattern#i", $uri, $matches)){
+                //echo 'Паттерн: ' . $pattern . '<br>';
+                //echo 'ROUTE';
+                //var_dump($route);
+
+                //echo 'MATCHES';
+                //var_dump($matches);
+
+                self::$route = $route;
+                //echo '<h3>Совпадение найдено</h3>';
+
+                //echo 'Текущий Route:';
+                //var_dump(self::$route);
                 foreach ($matches as $key => $value){
                     if (is_string($key)){
-                        $route[$key] = $value;
+                        self::$route[$key] = $value;
                     }
                 }
-                if (!isset($route['action'])){
-                    $route['action'] = 'default';
-                }
-                self::$route = $route;
+
+                //echo 'Финальный Route:';
+                //var_dump(self::$route);
                 return true;
             }
         }
+        echo '<h3>Совпадений НЕТ</h3>';
         return false;
+
     }
+
 
 
     /**
@@ -77,10 +96,9 @@ class Router
     private static function dispatch($uri)
     {
         $uri = self::removeQueryString($uri);
-        //echo '<h3>Строка URI: </h3>' . $uri;
+        //echo '<h3>Строка URI: ' . $uri . '</h3>';
 
         if (self::matchRoute($uri)){
-            //echo '<h3>Совпадение найдено</h3>';
             $controller = 'App\Controllers\\' . self::upperCamelCase(self::$route['controller']);
             //echo '<h3>Контроллер: ' . $controller . '</h3>';
             if (class_exists($controller)){
@@ -89,7 +107,7 @@ class Router
                 $action = 'action_' . self::lowerCamelCase(ucfirst(self::$route['action']));
                 //echo '<h3>Метод: ' . $action . '</h3>';
                 if (method_exists($cObj, $action)){
-                    $cObj->$action();
+                    $cObj->$action(self::$route);
                     $cObj->getView();
                 } else {
                     echo '<h3>Метод не найден</h3>';

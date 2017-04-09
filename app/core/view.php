@@ -21,7 +21,7 @@ class View
      * текущий вид
      * @var string
      */
-    public $view = '';
+    public $view = 'default';
 
     /**
      * текущий шаблон
