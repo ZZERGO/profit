@@ -23,7 +23,6 @@ implements IHasEmail
     {
         if ($_POST){
             //header(" Location: http://profit ");
-            exit();
         }
     }
 
