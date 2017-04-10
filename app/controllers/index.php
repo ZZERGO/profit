@@ -13,7 +13,7 @@ namespace App\Controllers;
 class Index extends App
 {
 
-    public $data = [];
+
 
     public function action_Error404()
     {

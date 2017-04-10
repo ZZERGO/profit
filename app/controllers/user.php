@@ -29,11 +29,20 @@ implements IHasEmail
 
     public function action_register()
     {
-
+        if ($_POST){
+            header("Location: http://" . $_SERVER['HTTP_HOST']);
+            exit;
+        }
     }
 
     public function action_userProfile()
     {
+        var_dump($this->route);
+        if (isset($this->route['id'])){
+            echo $this->route['id'];
+        } elseif (isset($this->route['login'])){
+            echo $this->route['login'];
+        }
         $this->view = 'profile';
     }
 
@@ -42,12 +51,12 @@ implements IHasEmail
         $this->view = 'profile';
     }
 
-    public function action_profileById()
+    public function action_viewAll()
     {
-        var_dump($this->route);
+        //var_dump($this->route);
         //$this->layout = false;
-        //$this->view = 'profile';
-        //echo 111;
+        $this->view = 'userList';
+
     }
 
     public function action_default()

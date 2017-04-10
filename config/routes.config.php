@@ -8,8 +8,8 @@ return [
     '^register$' => ['controller' => 'User', 'action' => 'register'],
 
     '^profile$' => ['controller' => 'User', 'action' => 'userProfile'],
-    '^user/(?<id>[0-9]+)$' => ['controller' => 'User', 'action' => 'profileById'],
-    '^user/(?<login>[a-z0-9-]+)$' => ['controller' => 'User', 'action' => 'profileByLogin'],
+    '^user/(?<id>[0-9]+)$' => ['controller' => 'User', 'action' => 'userProfile'],
+//    '^user/(?<login>[a-z0-9-]+)$' => ['controller' => 'User', 'action' => 'userProfile'],
 
 //    '^page/(?P<alias>[a-z+])'
     '^news/add$' => ['controller' => 'News', 'action' => 'add'],

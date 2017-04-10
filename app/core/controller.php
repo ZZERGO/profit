@@ -47,6 +47,4 @@ abstract class Controller
         $this->data = $vars;
     }
 
-    public abstract function action_default();
-
 }
